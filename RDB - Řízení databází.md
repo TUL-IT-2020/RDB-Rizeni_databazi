@@ -42,3 +42,9 @@ Dělíme původní relace na více schémat.
 > [!info] Syntéza
 > Každý atribut zvlášť, dle Armstrongových pravidel  slučujeme do tabulek.
 
+### Datové typy v DML
+
+Uložení textu:
+- `NVARCHAR()` - unikod
+- `VARCHAR()` - natahuje se do maximální velikosti
+- `CHAR()` - fixně velké pole
