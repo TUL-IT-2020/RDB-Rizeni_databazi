@@ -82,7 +82,7 @@ Adresa {
 
 Vozidlo {
   spz CHAR PK
-  firma_id INT FK
+  ico VARCHAR FK
   typ VARCHAR FK
   emise INT FK
   hmotnost INT
@@ -98,8 +98,8 @@ Emise_vozidla {
 }
 
 Firma ||--o{ Vozidlo : vlastni
-Firma ||--o| Adresa : ma_adresu
-Vozidlo ||--|| Typ_vozidla : je_typ
+Firma ||--o| Adresa : sidli
+Vozidlo ||--|| Typ_vozidla : je_typu
 Vozidlo ||--|| Emise_vozidla : ma_emisni_tridu
 ```
 
