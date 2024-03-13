@@ -1,0 +1,73 @@
+-- jedořádkový komentář
+/*
+víceřádkový komentář
+*/
+
+-- Nejdříve vytvoříme všechny tabulky.
+-- tables
+-- Table: Oddeleni
+CREATE TABLE Oddeleni (
+  zkratka char(3) NOT NULL,
+  nazev nvarchar(100) NOT NULL,
+  id_vedouci int NOT NULL,
+  id_zastupce int NULL, -- hodnota mže být NULL, může tedy existovat oddělení bez zástupce
+  CONSTRAINT Oddeleni_pk PRIMARY KEY (zkratka)
+);
+
+-- Table: Projekty
+CREATE TABLE Projekty (
+  id_projekt int NOT NULL,
+  nazev nvarchar(100) NOT NULL,
+  rozpocet money NOT NULL,
+  CONSTRAINT PK_Projekty PRIMARY KEY (id_projekt)
+);
+
+-- Table: Zamestnanci
+CREATE TABLE Zamestnanci (
+  id_zamestnanec int NOT NULL IDENTITY(1, 1), -- zajistí, že se bude hodnota vkládat automaticky, tj. autoinkrement (1, 2, 3 ...)
+  jmeno nvarchar(50) NOT NULL,
+  datum_narozeni datetime NULL,
+  telefon char(13) NOT NULL,
+  email nvarchar(100) NOT NULL,
+  oddeleni char(3) NOT NULL,
+  CONSTRAINT UQ_Email UNIQUE (email), -- zajistí, že atribut "email" bude unikátní
+  CONSTRAINT PK_Zamestnanci PRIMARY KEY (id_zamestnanec)
+);
+
+-- Table: ZamestnanciProjekty
+CREATE TABLE ZamestnanciProjekty (
+  id_projekt int NOT NULL,
+  id_zamestnanec int NOT NULL,
+  od datetime NOT NULL,
+  do datetime NULL, -- datum "do" je nepovinné
+  uvazek int NOT NULL,
+  CONSTRAINT PK_ZamestnanciProjekty PRIMARY KEY (id_projekt,id_zamestnanec,od), -- vytvoří složený primární klíč přes tři stributy
+  CONSTRAINT CK_Data CHECK (od < do) -- vytvoří integritní omezení typu CHECK, které kontroluje časovou souslednost při vkládání hodnot
+);
+
+-- Pak vytvoříme cizí klíče, neboli reference (vazby) mezi tabulkami.
+-- foreign keys
+-- Reference: FK_Oddeleni (table: Zamestnanci)
+-- Uprav tabulku "Zamestnanci" a přidej do ní integritní omezení pojmenované "FK_Oddeleni" typu cizí klíč na atributu "oddeleni" odkazující do tabulky "Oddeleni" na její atribut "zkratka".
+ALTER TABLE Zamestnanci ADD CONSTRAINT FK_Oddeleni FOREIGN KEY (oddeleni)
+REFERENCES Oddeleni (zkratka);
+
+-- Reference: FK_Projekty (table: ZamestnanciProjekty)
+-- Uprav tabulku "ZamestnanciProjekty" a přidej do ní integritní omezení pojmenované "FK_Projekty" typu cizí klíč na atributu "id_projekt" odkazující do tabulky "Projekty" na její atribut "id_projekt". Při pokusu o smazání projektu, na kterém pracuje nějaký zaměstnanec, nedělej nic.
+ALTER TABLE ZamestnanciProjekty ADD CONSTRAINT FK_Projekty FOREIGN KEY (id_projekt)
+REFERENCES Projekty (id_projekt) ON DELETE NO ACTION;
+
+-- Reference: FK_Vedouci (table: Oddeleni)
+-- Uprav tabulku "Oddeleni" a přidej do ní integritní omezení pojmenované "FK_Vedouci" typu cizí klíč na atributu "id_vedouci" odkazující do tabulky "Zamestnanci" na její atribut "id_zamestnanec". Při pokusu o smazání zaměstnance, který je vedoucím v nějakém oddělení, zaměstnance nedovol smazat (defaultní stav). Nejdříve je potřeba nastavit nového vedoucího a pak půjde bývalý vedoucí (již řadový zaměstnanec) smazat.
+ALTER TABLE Oddeleni ADD CONSTRAINT FK_Vedouci FOREIGN KEY (id_vedouci)
+REFERENCES Zamestnanci (id_zamestnanec);
+
+-- Reference: FK_Zamestnanci (table: ZamestnanciProjekty)
+-- Uprav tabulku "ZamestnanciProjekty" a přidej do ní integritní omezení pojmenované "FK_Zamestnanci" typu cizí klíč na atributu "id_zamestnanec" odkazující do tabulky "Zamestnanci" na její atribut "id_zamestnanec". Při pokusu o smazání zaměstnance, který pracuje na nějakém projektu, vymaž kaskádně i záznamy z tabulky "ZamestnanciProjekty".
+ALTER TABLE ZamestnanciProjekty ADD CONSTRAINT FK_Zamestnanci FOREIGN KEY (id_zamestnanec)
+REFERENCES Zamestnanci (id_zamestnanec) ON DELETE CASCADE;
+
+-- Reference: FK_Zastupce (table: Oddeleni)
+Uprav tabulku "Oddeleni" a přidej do ní integritní omezení pojmenované "FK_Zastupce" typu cizí klíč na atributu "id_zastupce" odkazující do tabulky "Zamestnanci" na její atribut "id_zamestnanec". Při pokusu o smazání zaměstnance, který je zástupcem v nějakém oddělení, vymaž zaměstnance a na místě, kde byl jeho identifikátor v tabulce "Oddeleni", nastav hodnotu NULL.
+ALTER TABLE Oddeleni ADD CONSTRAINT FK_Zastupce FOREIGN KEY (id_zastupce)
+REFERENCES Zamestnanci (id_zamestnanec) ON DELETE SET NULL;

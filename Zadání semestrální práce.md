@@ -1,14 +1,18 @@
 # Zadání semestrální práce
 
-Prezentace a demonstrace aplikace: 12. týden.
-- Prezentace 5. slidů, 10 minut max.
-- Co a jak funguje
+## Poznámky k zadání
 
-Odevzdání na našem počítači. Nasazení je jedno. 
+### Vygenerovaná data
+Vygenerovat 1000ce záznamů.
+Testování korektnosti dat na vstupu.
 
+Systémová data
+Chodí nám všechny správné atributy?
+- špatné zahodit, zalogovat.
 
+### Funkcionalita
 Podle počtu ujetých kilometrů jsme schopni určit zůstatek na účtu.
-- Berou se aktuální hodnoty po všech změnách
+- Berou se aktuální hodnoty po všech změnách.
 
 Update záznamů podle dat v JASON. 
 
@@ -23,17 +27,7 @@ Nová hmotnost auta se přidá do číselníku (triger).
 Firma může mít více vozidel.
 Vozidlo má jen jednu firmu.
 
-Vygenerovat 1000ce záznamů
-
-Systémová data
-Chodí nám všechny správné atributy?
-- špatné zahodit, zalogovat
-
-Platby konzistetní:
-Týkají se vždy vozidla.
-
 Jak udělat tabulku, která se liší v atributech?
-
 ## DBs
 2 databáze:
 - SQL, 
@@ -52,6 +46,9 @@ liquibase - git pro relační databáze. Použít při návrhu. Přidávat tabul
 
 Firmy a Auta v konzistentním stavu.
 
+Platby konzistentní:
+Týkají se vždy vozidla.
+
 `spz` : CHAR()
 typ vozidla: osobní/nákladní, enum
 adresa: formát je na nás
@@ -66,10 +63,60 @@ Omezit všechny možné domény atributů.
 Emisní třída určuje tarif na kilometr.
 - `km_sazba` určuje koef tarifu
 
-hmotnost : číslo
+`hmotnost` : číslo
 
-Testování korektnosti dat na vstupu
+```mermaid
+erDiagram
+
+Firma {
+  ico VARCHAR PK
+  nazev VARCHAR
+  adresa ENUM FK
+}
+
+Adresa {
+  mesto VARCHAR PK
+  ulice VARCHAR PK
+  psc INT PK
+}
+
+Vozidlo {
+  spz CHAR PK
+  firma_id INT FK
+  typ VARCHAR FK
+  emise INT FK
+  hmotnost INT
+  km_sazba DECIMAL
+}
+
+Typ_vozidla {
+  typ VARCHAR PK
+}
+
+Emise_vozidla {
+  trida int PK
+}
+
+Firma ||--o{ Vozidlo : vlastni
+Firma ||--o| Adresa : ma_adresu
+Vozidlo ||--|| Typ_vozidla : je_typ
+Vozidlo ||--|| Emise_vozidla : ma_emisni_tridu
+```
+
+
+
 ### NoSQL:
 - MongoDB
 
 Dovedeme dotaz mezi dvě dokumentama?
+
+## Odevzdání
+
+Prezentace a demonstrace aplikace: 12. týden.
+- Prezentace 5. slidů, 10 minut max.
+- Co a jak funguje
+
+Odevzdání na našem počítači. Nasazení je jedno. 
+
+
+
