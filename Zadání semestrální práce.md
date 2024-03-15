@@ -27,7 +27,8 @@ Nová hmotnost auta se přidá do číselníku (triger).
 Firma může mít více vozidel.
 Vozidlo má jen jednu firmu.
 
-Jak udělat tabulku, která se liší v atributech?
+> [!question] Jak udělat tabulku, která se liší v atributech?
+Nijak, uděláme více tabulek.
 ## DBs
 2 databáze:
 - SQL, 
@@ -42,7 +43,7 @@ liquibase - git pro relační databáze. Použít při návrhu. Přidávat tabul
 ### SQL:
 - MySQL
 - MSSQL
-- Postgre
+- Postgre <-
 
 Firmy a Auta v konzistentním stavu.
 
@@ -98,12 +99,10 @@ Emise_vozidla {
 }
 
 Firma ||--o{ Vozidlo : vlastni
-Firma ||--o| Adresa : sidli
+Firma |o--|| Adresa : sidli
 Vozidlo ||--|| Typ_vozidla : je_typu
 Vozidlo ||--|| Emise_vozidla : ma_emisni_tridu
 ```
-
-
 
 ### NoSQL:
 - MongoDB
@@ -119,4 +118,31 @@ Prezentace a demonstrace aplikace: 12. týden.
 Odevzdání na našem počítači. Nasazení je jedno. 
 
 
+## TODO:
+Django - Python
 
+@Nikita
+Docker:
+- [ ] Mongo
+- [ ] Postgre
+- [ ] Aplikace
+
+@Máša
+Frontend
+- [ ] Přihlášení do Aplikace na Firmu, admina
+- [ ] Vizualizace datb z DB
+	- Výpočet zůstatku kreditu pro jednotlivá auta
+- [ ] Nabíjení kreditu
+	- Firma, auto, kredit
+
+@Jarda
+Ochočit generátor, bash streamování dat na API.
+- [ ] Generátor -> JSON -> Bash na API
+- [ ] Parsování a validace příchozích dat
+	- [ ] Ukládání do NoSQL
+	- [ ] Validace vstupních dat
+		- [ ] Generování logu, @Nikita
+		- [ ] Ukládání validních dat do Postgre
+
+
+- [ ] Jak se naučit Django snadno a rychle @Jarda, @Nikita
