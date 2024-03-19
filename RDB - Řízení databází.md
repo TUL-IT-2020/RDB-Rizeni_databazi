@@ -53,3 +53,10 @@ Uložení textu:
 - `NVARCHAR()` - unikod
 - `VARCHAR()` - natahuje se do maximální velikosti
 - `CHAR()` - fixně velké pole
+
+Dotaz na `NULL` položku:
+```SQL
+WHERE parent IS NULL
+```
+
+Do finální verze programu nepsat datazy s `*`!
