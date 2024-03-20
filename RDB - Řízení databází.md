@@ -33,6 +33,7 @@ Mimo síť TUL je nutné použít [VPN](https://liane-new.tul.cz/index.php/VPN)
 Vytvořte si novou DB a pojmenujte ji `RDB2024_JmenoPrijmeni`
 
 ### Jednotlivá cvičení
+- [[cv02_Zamestnanci]]
 - [[cv03_Pivovary]]
 
 ## Poznámky

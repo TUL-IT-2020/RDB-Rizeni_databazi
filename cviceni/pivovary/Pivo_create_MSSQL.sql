@@ -10,7 +10,7 @@ Create table [Pivovar]
 	[nazev] Nvarchar(50) NOT NULL, UNIQUE ([nazev]),
 	[adresa] Nvarchar(100) NOT NULL, UNIQUE ([adresa]),
 	[majitel] Nvarchar(50) NOT NULL,
-Primary Key ([id_pivovar])
+CONSTRAINT PK_Pivovar Primary Key ([id_pivovar])
 ) 
 go
 
@@ -47,9 +47,9 @@ Primary Key ([id_pivo],[id_hospoda])
 go
 
 
-Alter table [Pivo] add  foreign key([id_pivovar]) references [Pivovar] ([id_pivovar])  on update no action on delete no action 
+Alter table [Pivo] add CONSTRAINT FK_Pivovar foreign key([id_pivovar]) references [Pivovar] ([id_pivovar])  on update no action on delete no action 
 go
-Alter table [Odebira] add  foreign key([id_pivo]) references [Pivo] ([id_pivo])  on update no action on delete cascade 
+Alter table [Odebira] add CONSTRAINT FK_Pivo foreign key([id_pivo]) references [Pivo] ([id_pivo])  on update no action on delete cascade 
 go
-Alter table [Odebira] add  foreign key([id_hospoda]) references [Hospoda] ([id_hospoda])  on update no action on delete cascade 
+Alter table [Odebira] add CONSTRAINT FK_Hospoda foreign key([id_hospoda]) references [Hospoda] ([id_hospoda])  on update no action on delete cascade 
 go
