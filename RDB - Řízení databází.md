@@ -16,6 +16,7 @@ Prezentace
 ## Zkouška
 Na papír, praktický návrh Databáze (SQL).
 
+[[RDB-zkouska_zadni|Cvičná zadání]]
 ## Cvičení
 ### Nástroje pro výuku
 - [Vertabelo Database Modeler](https://www.vertabelo.com/)
