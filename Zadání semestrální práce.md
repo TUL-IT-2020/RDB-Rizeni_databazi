@@ -187,7 +187,8 @@ Docker:
 - [ ] Postgre
 - [ ] Aplikace
 
-@Máša
+--@Máša--
+@MatějNavrátil
 Frontend
 - [ ] Přihlášení do Aplikace na Firmu, admina
 - [ ] Vizualizace datb z DB

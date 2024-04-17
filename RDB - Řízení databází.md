@@ -78,3 +78,20 @@ WHERE parent IS NULL
 ```
 
 Do finální verze programu nepsat datazy s `*`!
+
+### Transakce 
+Transakce vychází z [[SQL - ACID|ACID]]. 
+
+Používat transakce před:
+- insert
+- update
+- delete
+
+Konzistence -> všechny data splňují integritní omezení.
+
+### Indexy
+[[Indexy]]
+### Statistiky
+
+### Množinové dotazy
+
