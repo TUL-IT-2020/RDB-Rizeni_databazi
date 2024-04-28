@@ -95,3 +95,4 @@ Konzistence -> všechny data splňují integritní omezení.
 
 ### Množinové dotazy
 
+### OVER
