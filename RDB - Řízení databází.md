@@ -16,6 +16,8 @@ Prezentace
 ## Zkouška
 Na papír, praktický návrh Databáze (SQL).
 
+![[Témata ke zkoušce z předmětu RDB]]
+
 [[RDB-zkouska_zadni|Cvičná zadání]]
 ## Cvičení
 ### Nástroje pro výuku
@@ -91,7 +93,7 @@ Konzistence -> všechny data splňují integritní omezení.
 
 ### Indexy
 [[Indexy]]
+
 ### Statistiky
 
 ### Množinové dotazy
-

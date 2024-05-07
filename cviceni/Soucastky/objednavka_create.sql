@@ -59,9 +59,36 @@ SELECT * FROM Objednavka
 
 -- dummy
 SELECT * INTO Soucastka2 FROM Soucastka
-
+go
 -- nicime soucastka2
 
 -- logovaci trigger
 -- insert/update/delete, sloupec, user
 -- procedura, kdo me vola?
+
+CREATE TRIGGER Objednavka_insert_update_delete
+ON Soucastka2
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    DECLARE @action varchar(10);
+    SET @action = 
+        CASE
+            WHEN EXISTS(SELECT * FROM inserted) AND EXISTS(SELECT * FROM deleted) THEN 'UPDATE'
+            WHEN EXISTS(SELECT * FROM inserted) THEN 'INSERT'
+            WHEN EXISTS(SELECT * FROM deleted) THEN 'DELETE'
+            ELSE 'UNKNOWN'
+        END;
+
+    PRINT 'Byla provedena operace ' + @action + '.';
+
+    -- Další akce mohou být prováděny v závislosti na @action
+
+END;
+go
+
+-- otestovani našho noveho triggeru:
+UPDATE Soucastka2 set cena = 1000 WHERE cissou = 16;
+DELETE FROM Soucastka2 WHERE cissou = 16;
+INSERT INTO Soucastka2 VALUES (16, 100, 'ruda');
+go

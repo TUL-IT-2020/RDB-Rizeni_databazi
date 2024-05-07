@@ -1,0 +1,73 @@
+# Návrh DB - zadání k procvičení
+
+## 1. Příklad
+Navrhněte schéma pro databázi podnikové autopůjčovny. 
+
+Uživatelé, u nichž evidujeme jméno, telefon, zaměstnanecké číslo, e-mail a číslo zaměstnanecké karty, si v určitý časový interval, který předem zadají, půjčují auta. 
+U aut potřebujeme znát značku, model, obsah, registrační značku (SPZ), vin, spotřebu, druh paliva, aktuální najeté kilometry (ODO) a stav (aktivní / neaktivní / vyřazené). 
+
+Auto si uživatel půjčí na vybraném parkovišti a na jakémkoli z možných parkovišť auto vrátí (na tom samém nebo na jiném). Parkoviště má svůj název, GPS souřadnice vjezdu, adresu a stav (aktivní / neaktivní). O dané výpůjčce musíme vědět, v jakém je aktuálně stavu (schválená / neschválená / probíhající / zrušená / propadlá / ukončená). Pokud v zadání chybí nějaká informace, napište do zadání věty, které ho o tuto informaci doplní, a pak upravte schéma.
+## 2. Příklad
+Navrhněte schéma pro databázi ME ve fotbale. 
+
+Zápasy mistrovství se hrají na stadionech s různou kapacitou v různých městech. Každý zápas má své pořadové číslo v rámci celého šampionátu. U odehraného zápasu se kromě výsledného skóre a návštěvnosti zaznamenává, kdo dal góly a kdo dostal žlutou nebo červenou kartu. Ke každému zápasu existuje soupiska hráčů a náhradníků dvou týmů. U hráče v týmu se eviduje jméno, post, na kterém hraje, a věk. Pokud v zadání chybí nějaká informace, napište do zadání věty, které ho o tuto informaci doplní, a pak upravte schéma.  
+
+## Pojišťovna
+### Zadání
+### Postup řešení
+
+Pojištěnec(J, P, PK:RC, DN, A)
+
+Adresa(U, C, M)
+
+Pojišťovna(PK:K, N, SP, Kontakt)
+
+Kontakt(Hodnota, Typ)
+
+Typy(Typ)
+- omezení domény atributů
+
+Nemocnice(PK:ICO, N, S-> Adresa)
+
+Pojištenec_Pojištovna(PK:ČP, PK:Pojištenec, PK:Datum)
+Od, do
+
+```mermaid
+erDiagram
+
+Pojistenec {
+	J int
+	P string
+	RC string PK
+	DN string
+	A string
+}
+
+Adresa {
+U int
+C string
+M string
+}
+
+Pojistovna {
+N string
+SP string
+Kontakt string
+}
+
+Kontakt {
+Typ string
+Hodnota string
+}
+
+Nemocnice {
+ICO int
+N string
+S string
+}
+
+Pojisteny_Pojistovna {
+CP int
+Datum date
+}
+```
