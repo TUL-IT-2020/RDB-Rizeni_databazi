@@ -97,3 +97,5 @@ Konzistence -> všechny data splňují integritní omezení.
 ### Statistiky
 
 ### Množinové dotazy
+
+### OVER
