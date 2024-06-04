@@ -7,10 +7,10 @@
 
 ## Zadání z předmětu RDB
 - [[RDB_zkouska_2014-spanek|lékař]]
-## 1. Příklad
+### 1. Příklad
 ![[RDB zadání autopůjčovna]]
-## 2. Příklad
+### 2. Příklad
 ![[RDB zadání ME ve fotbale]]
 
-## 3. Příklad 
+### 3. Příklad 
 ![[RDB zadání Pojišťovna]]
