@@ -4,3 +4,10 @@
 3. U vybraných dvou entit určete normální formu a pokuste se je upravit tak, abyste normální formu snížili. Uveďte, proč je nižší a odůvodněte pomocí funkčních závislostí.
 
 ## Řešení
+### Schéma DB
+```mermaid
+---
+title: projekty
+---
+erDiagram 
+```

@@ -4,3 +4,57 @@
 3. U vybraných dvou entit určete normální formu a pokuste se je upravit tak, abyste normální formu snížili. Uveďte, proč je nižší a odůvodněte pomocí funkčních závislostí.
 
 ## Řešení
+### Schéma DB
+```mermaid
+---
+title: Experimetny
+---
+erDiagram 
+    WORKER {
+        nvarchar(128) email PK
+        nvarchar(50) name
+        nvarchar(50) surname
+    }
+    EXPERIMENT {
+        nvarchar(50) name PK
+        date date PK
+        type_worker leader FK
+    }
+    WORKER ||--|| EXPERIMENT : is_leading
+    WORKERS_EXPERIMENTS {
+        type worker PK, FK
+        type experiment PK, FK
+    }
+    WORKER ||--o{ WORKERS_EXPERIMENTS : works_on
+    EXPERIMENT ||--|{ WORKERS_EXPERIMENTS : done_by
+
+    TASK {
+        nvarchar(50) name PK
+        type experiment PK, FK
+        type_worker leader FK "NN"
+    }
+    WORKER ||--|| TASK : is_leading
+    TASK }|--|| EXPERIMENT : is_part_of
+    WORKERS_TASKS {
+        type worker PK, FK
+        type experiment PK, FK
+    }
+    WORKER ||--o{ WORKERS_TASKS : works_on
+    TASK ||--|{ WORKERS_TASKS : done_by
+
+    ATTACHMENT {
+        nvarchar(125) file_path PK
+        type task FK, PK
+        nvarchar(64) file_name "NN"
+        type by_worker FK
+    }
+    ATTACHMENT }o--|| TASK : attached
+
+    LAB_SAMPLE {
+        type experiment PK, FK
+        char lable PK "max 10: A-J"
+        nvarchar(125) file_path "NN"
+        nvarchar(64) file_name "NN"
+    }
+    LAB_SAMPLE }o--|| EXPERIMENT : have
+```

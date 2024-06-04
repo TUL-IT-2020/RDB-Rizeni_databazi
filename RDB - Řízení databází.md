@@ -57,16 +57,6 @@ erDiagram
 ### Normalizace
 [[RMD - Normalizace]]
 
-### Funkční závislosti
-Určujeme ze specifikace projektu, nikoliv z dat!
-
-### Dekompozice vs Syntéza
-> [!info] Dekopozice
-Dělíme původní relace na více schémat.
-
-> [!info] Syntéza
-> Každý atribut zvlášť, dle Armstrongových pravidel  slučujeme do tabulek.
-
 ### Datové typy v DML
 
 Uložení textu:
